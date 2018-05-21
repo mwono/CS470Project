@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/MWTestScene.unity
+- path: Assets/Scenes/CharController.unity
   isLoaded: 1
   isActive: 1
