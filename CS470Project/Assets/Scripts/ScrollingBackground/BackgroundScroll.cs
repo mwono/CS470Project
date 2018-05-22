@@ -59,6 +59,7 @@ public class BackgroundScroll : MonoBehaviour {
 
         // for non repeating objects just scroll them and remove them once
         // they go off screen
+        // (they are removed when they collide with offscreen object named ObstacleDestroyer)
         foreach(GameObject go in objectsToScroll)
         {
             go.transform.Translate(Vector3.left * Time.deltaTime * scrollSpeed);
@@ -80,5 +81,14 @@ public class BackgroundScroll : MonoBehaviour {
     public void RemoveObstacle(GameObject go)
     {
         objectsToScroll.Remove(go);
+    }
+
+    public void SetSpeed(float f)
+    {
+        scrollSpeed = f;
+    }
+    public float GetSpeed()
+    {
+        return scrollSpeed;
     }
 }

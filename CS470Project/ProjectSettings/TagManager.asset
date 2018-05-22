@@ -3,14 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-<<<<<<< HEAD
-  - Cam2(Monochrome)
-  - Ground
-=======
-  - Obstacle
-  - Canvas
->>>>>>> 2ed50fe388de02f248fd4dfa7bf05835b2a613f9
+  tags: []
   layers:
   - Default
   - TransparentFX
