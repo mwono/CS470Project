@@ -10,14 +10,17 @@ public class PlayerMovement : MonoBehaviour {
     Vector3 groundPos;
     float jumpSpeed = 8.0f;
     float fallSpeed = 11.0f;
-    public bool inputJump = false;
+    public bool movingUpwards = false;
     public bool grounded = true;
     public Animator playerAnim;
     public BackgroundScroll bgScript;
+    bool falling = false;
 
     float leftSpeed = 4.5f;
     float rightSpeed = 8.5f;
     float defaultSpeed = -1f;
+    float movingUpTime = 0.42f;
+    float curMovingUpTime = 0;
 
     void Start()
     {
@@ -25,29 +28,43 @@ public class PlayerMovement : MonoBehaviour {
         groundHeight = transform.position.y;
         maxJumpHeight = transform.position.y + maxJumpHeight;
         defaultSpeed = bgScript.GetSpeed();
+        curMovingUpTime = movingUpTime;
     }
-
     void Update()
     {
 
         // jumping
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
         {
             if (grounded)
             {
                 groundPos = transform.position;
-                inputJump = true;
+                movingUpwards = true;
                 playerAnim.SetBool("Jump", true);
-                StartCoroutine("Jump");
             }
         }
-        if (transform.position == groundPos)
-            grounded = true;
-        else
-            grounded = false;
 
+        if (movingUpwards && curMovingUpTime > 0)
+            curMovingUpTime -= Time.deltaTime;
+        else if(movingUpwards)
+        {
+            curMovingUpTime = movingUpTime;
+            movingUpwards = false;
+        }
+        if (movingUpwards)
+            transform.Translate(Vector3.up * jumpSpeed * Time.smoothDeltaTime);
+        else if (!movingUpwards && !grounded)
+        {
+            transform.Translate(Vector3.down * fallSpeed * Time.smoothDeltaTime);
+            //if (transform.position.y < groundPos.y)
+        }
+        if (grounded)
+        {
+            //transform.position = groundPos;
+            playerAnim.SetBool("Jump", false);
+        }
         // move left
-        if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             bgScript.SetSpeed(leftSpeed);
         }
@@ -75,16 +92,19 @@ public class PlayerMovement : MonoBehaviour {
         while (true)
         {
             if (transform.position.y >= maxJumpHeight)
-                inputJump = false;
-            if (inputJump)
+                movingUpwards = false;
+            if (movingUpwards)
                 transform.Translate(Vector3.up * jumpSpeed * Time.smoothDeltaTime);
-            else if (!inputJump)
+            else if (!movingUpwards)
             {
+                falling = true;
                 transform.Translate(Vector3.down * fallSpeed * Time.smoothDeltaTime);
-                if (transform.position.y < groundPos.y)
+                //if (transform.position.y < groundPos.y)
+                if (grounded)
                 {
                     transform.position = groundPos;
                     playerAnim.SetBool("Jump", false);
+                    falling = false;
                     StopAllCoroutines();
                 }
             }
@@ -102,5 +122,15 @@ public class PlayerMovement : MonoBehaviour {
             gameOverCanvas.SetActive(true);
             Destroy(this.gameObject);
         }
+    }
+
+
+    public void SetGrounded(bool f)
+    {
+        grounded = f;
+    }
+    public bool isGrounded()
+    {
+        return grounded;
     }
 }

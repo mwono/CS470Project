@@ -12,7 +12,7 @@ public class BackgroundScroll : MonoBehaviour {
     List<GameObject> objectsToScrollAndRepeat = new List<GameObject>();
 
     // prefab to hold main repeating background
-    public GameObject repeatedBgPrefab;
+    public GameObject[] repeatedBgPrefabs;
 
     // empty gameobject that holds the backgrounds (for organization)
     public Transform scrollingBgHolder;
@@ -28,8 +28,8 @@ public class BackgroundScroll : MonoBehaviour {
     bool paused = true;
 
 	void Start () {
-        GameObject bg1 = Instantiate(repeatedBgPrefab, startPos, Quaternion.identity, scrollingBgHolder);
-        GameObject bg2 = Instantiate(repeatedBgPrefab, new Vector3(startPos.x+repeatedBgWidth,startPos.y,startPos.z), Quaternion.identity, scrollingBgHolder);
+        GameObject bg1 = SpawnRandomBgObject(startPos);
+        GameObject bg2 = SpawnRandomBgObject(new Vector3(startPos.x + repeatedBgWidth, startPos.y, startPos.z));
         objectsToScrollAndRepeat.Add(bg1);
         objectsToScrollAndRepeat.Add(bg2);
 
@@ -50,11 +50,21 @@ public class BackgroundScroll : MonoBehaviour {
 
         // for repeating objects, scroll them and the repeat them
         // once they go off screen
-        foreach(GameObject go in objectsToScrollAndRepeat)
+        for(int i = objectsToScrollAndRepeat.Count-1;i>=0;i--)
         {
+            GameObject go = objectsToScrollAndRepeat[i];
+            if(go == null)
+            {
+                objectsToScrollAndRepeat.Remove(go);
+                continue;
+            }
             go.transform.Translate(Vector3.left * Time.deltaTime * scrollSpeed);
             if (go.transform.position.x <= -repeatedBgWidth)
-                go.transform.position = new Vector3(startPos.x + repeatedBgWidth, startPos.y, startPos.z);
+            {
+                Destroy(go);
+                go = SpawnRandomBgObject(new Vector3(startPos.x + repeatedBgWidth, startPos.y, startPos.z));
+                objectsToScrollAndRepeat.Add(go);
+            }
         }
 
         // for non repeating objects just scroll them and remove them once
@@ -90,5 +100,11 @@ public class BackgroundScroll : MonoBehaviour {
     public float GetSpeed()
     {
         return scrollSpeed;
+    }
+
+    GameObject SpawnRandomBgObject(Vector3 position)
+    {
+        int randIndex = Random.Range(0, repeatedBgPrefabs.Length);
+        return Instantiate(repeatedBgPrefabs[randIndex], position, Quaternion.identity, scrollingBgHolder);
     }
 }
