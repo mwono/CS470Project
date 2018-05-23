@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour {
-    public GameObject[] commonObstaclePrefabs;
+    public Pooler[] commonObstaclePrefabs;//was GameObject[]
     public BackgroundScroll bgScrollScript;
 
     float timeToSpawn = 3f;
@@ -31,13 +31,11 @@ public class ObstacleSpawner : MonoBehaviour {
         if(curTime >= timeToSpawn)
         {
             int randIndex = Random.Range(0, commonObstaclePrefabs.Length);
-            GameObject obstacle = Instantiate(commonObstaclePrefabs[randIndex], spawnPos,Quaternion.identity);
+            GameObject obstacle = commonObstaclePrefabs[randIndex].getPooledTile();//Instantiate(commonObstaclePrefabs[randIndex], spawnPos,Quaternion.identity);
+            obstacle.transform.position = spawnPos;
             if(obstacle.name != "Obstacle2")
                 bgScrollScript.AddNewObstacle(obstacle);
             curTime = 0f;
         }
-
-
-		
 	}
 }

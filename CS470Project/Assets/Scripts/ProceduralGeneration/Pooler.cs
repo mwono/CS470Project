@@ -21,6 +21,7 @@ public class Pooler : MonoBehaviour {
         }
 	}
 	
+    //retrieves the prefab
 	public GameObject getPooledTile()
     {
         for (int i = 0; i < pool.Count; i++)

@@ -12,7 +12,7 @@ public class BackgroundScroll : MonoBehaviour {
     List<GameObject> objectsToScrollAndRepeat = new List<GameObject>();
 
     // prefab to hold main repeating background
-    public GameObject[] repeatedBgPrefabs;
+    public GameObject[] repeatedBgPrefabs;//For pools: Pooler[]
 
     // empty gameobject that holds the backgrounds (for organization)
     public Transform scrollingBgHolder;
@@ -53,6 +53,7 @@ public class BackgroundScroll : MonoBehaviour {
         for(int i = objectsToScrollAndRepeat.Count-1;i>=0;i--)
         {
             GameObject go = objectsToScrollAndRepeat[i];
+            //if(!go.activeInHierarchy)
             if(go == null)
             {
                 objectsToScrollAndRepeat.Remove(go);
@@ -61,6 +62,8 @@ public class BackgroundScroll : MonoBehaviour {
             go.transform.Translate(Vector3.left * Time.deltaTime * scrollSpeed);
             if (go.transform.position.x <= -repeatedBgWidth)
             {
+                go.transform.Translate(Vector3.zero);
+                //go.gameObject.SetActive(false);
                 Destroy(go);
                 go = SpawnRandomBgObject(new Vector3(startPos.x + repeatedBgWidth, startPos.y, startPos.z));
                 objectsToScrollAndRepeat.Add(go);
@@ -73,6 +76,7 @@ public class BackgroundScroll : MonoBehaviour {
         foreach(GameObject go in objectsToScroll)
         {
             go.transform.Translate(Vector3.left * Time.deltaTime * scrollSpeed);
+            go.SetActive(true);
         }
 
 
@@ -105,6 +109,10 @@ public class BackgroundScroll : MonoBehaviour {
     GameObject SpawnRandomBgObject(Vector3 position)
     {
         int randIndex = Random.Range(0, repeatedBgPrefabs.Length);
+        //GameObject repeatedBG = repeatedBgPrefabs[randIndex].getPooledTile();
+        //repeatedBG.transform.position = position;
+        //repeatedBG.SetActive(true);
+        //return repeatedBG;
         return Instantiate(repeatedBgPrefabs[randIndex], position, Quaternion.identity, scrollingBgHolder);
     }
 }
