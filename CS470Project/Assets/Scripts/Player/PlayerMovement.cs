@@ -41,6 +41,7 @@ public class PlayerMovement : MonoBehaviour {
                 groundPos = transform.position;
                 movingUpwards = true;
                 playerAnim.SetBool("Jump", true);
+                grounded = false;
             }
         }
 
@@ -89,6 +90,15 @@ public class PlayerMovement : MonoBehaviour {
         }
 
 
+    }
+
+    private void LateUpdate()
+    {
+        if (!grounded)
+        {
+            playerAnim.SetBool("Jump", true);
+        }
+        else playerAnim.SetBool("Jump", false);
     }
 
     IEnumerator Jump()
@@ -140,6 +150,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         GameEvents.TriggerPlayerDie();
         gameOverCanvas.SetActive(true);
-        Destroy(this.gameObject);
+        playerAnim.SetTrigger("Hit");
+        //Destroy(this.gameObject);
     }
 }
