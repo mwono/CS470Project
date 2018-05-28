@@ -27,11 +27,35 @@ public class BackgroundScroll : MonoBehaviour {
 
     bool paused = true;
 
-	void Start () {
+    // **SKYBOX STUFF**
+    // //////
+    // Does not affect gameplay, just looks
+
+    public GameObject[] repeatedSkyboxPrefabs;//For pools: Pooler[]
+    // list of skybox objects to be scrolling and repeated
+    List<GameObject> skyboxToScrollAndRepeat = new List<GameObject>();
+    // position to spawn first skybox element
+    Vector3 startSkyPos = new Vector3(-26, -14.11f, 13.8f);
+    // width of background element
+    float repeatedSkyboxWidth = 60f;
+    float skyScrollSpeed = 4.5f;
+
+    /// //////////////////
+    /// 
+    /// End skybox section
+
+    void Start () {
         GameObject bg1 = SpawnRandomBgObject(startPos);
         GameObject bg2 = SpawnRandomBgObject(new Vector3(startPos.x + repeatedBgWidth, startPos.y, startPos.z));
         objectsToScrollAndRepeat.Add(bg1);
         objectsToScrollAndRepeat.Add(bg2);
+
+        // Skybox stuff (does not affect gameplay)
+        GameObject skyBg1 = SpawnRandomSkyboxObject(startSkyPos);
+        GameObject skyBg2 = SpawnRandomSkyboxObject(new Vector3(startSkyPos.x + repeatedSkyboxWidth, startSkyPos.y, startSkyPos.z));
+        skyboxToScrollAndRepeat.Add(skyBg1);
+        skyboxToScrollAndRepeat.Add(skyBg2);
+        // end skybox section
 
         GameEvents.Event_PlayerDie += GameEvents_Event_PlayerDie;
 
@@ -80,8 +104,36 @@ public class BackgroundScroll : MonoBehaviour {
         }
 
 
-		
-	}
+
+
+
+        // skybox scrolling (does not affect gameplay)
+
+        // for repeating objects, scroll them and the repeat them
+        // once they go off screen
+        for (int i = skyboxToScrollAndRepeat.Count - 1; i >= 0; i--)
+        {
+            GameObject go = skyboxToScrollAndRepeat[i];
+            //if(!go.activeInHierarchy)
+            if (go == null)
+            {
+                skyboxToScrollAndRepeat.Remove(go);
+                continue;
+            }
+            go.transform.Translate(Vector3.left * Time.deltaTime * skyScrollSpeed);
+            if (go.transform.position.x <= -repeatedSkyboxWidth - 23f)
+            {
+                go.transform.Translate(Vector3.zero);
+                //go.gameObject.SetActive(false);
+                Destroy(go);
+                go = SpawnRandomSkyboxObject(new Vector3(startSkyPos.x + repeatedSkyboxWidth, startSkyPos.y, startSkyPos.z));
+                skyboxToScrollAndRepeat.Add(go);
+            }
+        }
+
+
+
+    }
 
     public void SetPause(bool f)
     {
@@ -119,5 +171,15 @@ public class BackgroundScroll : MonoBehaviour {
         //repeatedBG.SetActive(true);
         //return repeatedBG;
         return Instantiate(repeatedBgPrefabs[randIndex], position, Quaternion.identity, scrollingBgHolder);
+    }
+
+    GameObject SpawnRandomSkyboxObject(Vector3 position)
+    {
+        int randIndex = Random.Range(0, repeatedSkyboxPrefabs.Length);
+        //GameObject repeatedBG = repeatedBgPrefabs[randIndex].getPooledTile();
+        //repeatedBG.transform.position = position;
+        //repeatedBG.SetActive(true);
+        //return repeatedBG;
+        return Instantiate(repeatedSkyboxPrefabs[randIndex], position, Quaternion.identity, scrollingBgHolder);
     }
 }
