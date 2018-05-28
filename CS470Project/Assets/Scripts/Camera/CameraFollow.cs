@@ -11,6 +11,10 @@ public class CameraFollow : MonoBehaviour {
 
     void Awake()
     {
+        if (player == null)
+        {
+            player = GameObject.Find("Player");
+        }
         this.transform.position = new Vector3(player.transform.position.x + buffer, 0, distAway);
 
         mCam.rect = new Rect(.5f, 0, .5f, 1);
