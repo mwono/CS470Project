@@ -113,6 +113,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &37161580
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4826660824388044, guid: 4a8fb82f946e30d4094b93a5ac73c449, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 7.8207645
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826660824388044, guid: 4a8fb82f946e30d4094b93a5ac73c449, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.24714777
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826660824388044, guid: 4a8fb82f946e30d4094b93a5ac73c449, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 1.8111384
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826660824388044, guid: 4a8fb82f946e30d4094b93a5ac73c449, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826660824388044, guid: 4a8fb82f946e30d4094b93a5ac73c449, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826660824388044, guid: 4a8fb82f946e30d4094b93a5ac73c449, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826660824388044, guid: 4a8fb82f946e30d4094b93a5ac73c449, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826660824388044, guid: 4a8fb82f946e30d4094b93a5ac73c449, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1564614010402220, guid: 4a8fb82f946e30d4094b93a5ac73c449, type: 2}
+      propertyPath: m_Name
+      value: EnemyPool
+      objectReference: {fileID: 0}
+    - target: {fileID: 114145245664468806, guid: 4a8fb82f946e30d4094b93a5ac73c449,
+        type: 2}
+      propertyPath: obj
+      value: 
+      objectReference: {fileID: 1245902994789666, guid: fd2ab9c403caf1e45805ddff5aec4273,
+        type: 2}
+    - target: {fileID: 114145245664468806, guid: 4a8fb82f946e30d4094b93a5ac73c449,
+        type: 2}
+      propertyPath: pooledAmt
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 4a8fb82f946e30d4094b93a5ac73c449, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &229809563
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,6 +689,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 362cd92d84416734996660a03e6407f9, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &830366452 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114145245664468806, guid: 4a8fb82f946e30d4094b93a5ac73c449,
+    type: 2}
+  m_PrefabInternal: {fileID: 37161580}
+  m_Script: {fileID: 11500000, guid: 46f6d3f3098f853499ac38cce737382e, type: 3}
 --- !u!4 &839268613 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4921098358418800, guid: 976f64e5849d24749b2863d611c9977a,
@@ -940,6 +1003,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   commonObstaclePrefabs:
   - {fileID: 569844656}
+  - {fileID: 830366452}
   bgScrollScript: {fileID: 982029824}
 --- !u!1 &990095648
 GameObject:

@@ -34,13 +34,12 @@ public class PlayerMovement : MonoBehaviour {
     {
 
         // jumping
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0) && !bgScript.IsPaused())
         {
             if (grounded)
             {
                 groundPos = transform.position;
                 movingUpwards = true;
-                playerAnim.SetBool("Jump", true);
                 grounded = false;
             }
         }
@@ -58,11 +57,6 @@ public class PlayerMovement : MonoBehaviour {
         {
             transform.Translate(Vector3.down * fallSpeed * Time.smoothDeltaTime);
             //if (transform.position.y < groundPos.y)
-        }
-        if (grounded)
-        {
-            //transform.position = groundPos;
-            playerAnim.SetBool("Jump", false);
         }
         // move left
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))

@@ -88,6 +88,11 @@ public class BackgroundScroll : MonoBehaviour {
         paused = f;
     }
 
+    public bool IsPaused()
+    {
+        return paused;
+    }
+
     public void AddNewObstacle(GameObject go)
     {
         objectsToScroll.Add(go);
