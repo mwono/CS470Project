@@ -20,7 +20,7 @@ public class HeliBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        x += 0.03f;
+        x += 0.02f;
         if (x > (Mathf.PI * 2)) x = 0.0f;
         ascend = (x >= (Mathf.PI));
         
