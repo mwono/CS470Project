@@ -5,6 +5,8 @@
 /[Bb]uilds/
 /Assets/AssetStoreTools*
 [Ll]ibrary/
+Library/
+library/
 [Tt]emp/
 [Oo]bj/
 [Bb]uild/
@@ -40,3 +42,6 @@ sysinfo.txt
 *.unitypackage
 CS470Project/Library/expandedItems
 CS470Project/Library/metadata/d4/d44890e717496514e897e8401f6e5bb2.info
+*.log
+*.dwlt
+CS470Project/Library/CurrentLayout.dwlt
