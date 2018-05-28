@@ -38,7 +38,7 @@ public class BackgroundScroll : MonoBehaviour {
     Vector3 startSkyPos = new Vector3(-26, -14.11f, 13.8f);
     // width of background element
     float repeatedSkyboxWidth = 60f;
-    float skyScrollSpeed = 4.5f;
+    float skyScrollSpeed = 3f;
 
     /// //////////////////
     /// 
@@ -111,6 +111,8 @@ public class BackgroundScroll : MonoBehaviour {
 
         // for repeating objects, scroll them and the repeat them
         // once they go off screen
+        float skyScrollFactor = 0.46f;
+        skyScrollSpeed = scrollSpeed * skyScrollFactor;
         for (int i = skyboxToScrollAndRepeat.Count - 1; i >= 0; i--)
         {
             GameObject go = skyboxToScrollAndRepeat[i];
