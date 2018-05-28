@@ -82,7 +82,11 @@ public class PlayerMovement : MonoBehaviour {
         }
 
 
-        // move right
+       // check for falling
+       if(transform.position.y <= -3f)
+        {
+            PlayerDie();
+        }
 
 
     }
@@ -118,9 +122,7 @@ public class PlayerMovement : MonoBehaviour {
         // check if we die
         if(collision.gameObject.tag == "Obstacle")
         {
-            GameEvents.TriggerPlayerDie();
-            gameOverCanvas.SetActive(true);
-            Destroy(this.gameObject);
+            PlayerDie();
         }
     }
 
@@ -132,5 +134,12 @@ public class PlayerMovement : MonoBehaviour {
     public bool isGrounded()
     {
         return grounded;
+    }
+
+    public void PlayerDie()
+    {
+        GameEvents.TriggerPlayerDie();
+        gameOverCanvas.SetActive(true);
+        Destroy(this.gameObject);
     }
 }

@@ -22,7 +22,10 @@ public class CameraFollow : MonoBehaviour {
 
     private void Update()
     {
-        this.transform.position = new Vector3(player.transform.position.x + buffer, player.transform.position.y, distAway);
+        if (player != null)
+        {
+            this.transform.position = new Vector3(player.transform.position.x + buffer, player.transform.position.y, distAway);
+        }
     }
 
 
