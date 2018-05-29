@@ -7,12 +7,12 @@ public class CamScript : MonoBehaviour
 {
     Camera cam;
     public float intensity;
-    private Material material;
+    private Material imageEffect;
 
     // Creates a private material used to the effect
     void Awake()
     {
-        material = new Material(Shader.Find("Hidden/Monochrome"));
+        imageEffect = new Material(Shader.Find("Hidden/Monochrome"));
         cam = this.GetComponent<Camera>();
     }
 
@@ -24,7 +24,7 @@ public class CamScript : MonoBehaviour
             Graphics.Blit(source, destination);
             return;
         }
-        material.SetFloat("_bwBlend", intensity);
-        Graphics.Blit(source, destination, material);
+        imageEffect.SetFloat("_bwBlend", intensity);
+        Graphics.Blit(source, destination, imageEffect);
     }
 }

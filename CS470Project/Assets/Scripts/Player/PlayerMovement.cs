@@ -32,9 +32,8 @@ public class PlayerMovement : MonoBehaviour {
     }
     void Update()
     {
-
         // jumping
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0) && !bgScript.IsPaused())
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0)) && !bgScript.IsPaused())
         {
             if (grounded)
             {
