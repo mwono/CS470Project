@@ -2878,8 +2878,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: {fileID: 915206275}
   GameOver: {fileID: 1991051215}
-  ScoreCanvas: {fileID: 162421114}
-  cam: {fileID: 516200773}
 --- !u!61 &1593165610
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2892,7 +2890,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.35630366, y: 0.34507108}
+  m_Offset: {x: -0.35630366, y: 1.4498005}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2903,7 +2901,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.28739268, y: 5.5549436}
+  m_Size: {x: 0.28739268, y: 20.383282}
   m_EdgeRadius: 0
 --- !u!1001 &1654593789
 Prefab:

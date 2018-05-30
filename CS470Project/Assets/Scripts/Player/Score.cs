@@ -5,16 +5,10 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour {
     public Text score;
-    public GameObject GameOver, ScoreCanvas;
-    public Camera cam;
+    public GameObject GameOver;
     
     int sc;
     float timeToStart = 3f;
-
-    private void Start()
-    {
-        ScoreCanvas.transform.position = cam.ScreenToWorldPoint(new Vector3());
-    }
 
     // Update is called once per frame
     void Update () {
@@ -23,7 +17,7 @@ public class Score : MonoBehaviour {
         if (timeToStart <= 0f && !GameOver.activeInHierarchy)
         {
             sc = int.Parse(score.text);
-            sc++;
+            sc += Mathf.CeilToInt(Time.deltaTime);
             score.text = sc.ToString();
         }
 	}
@@ -33,7 +27,7 @@ public class Score : MonoBehaviour {
         if (collision.tag == "Obstacle")
         {
             sc = int.Parse(score.text);
-            sc += 10;
+            sc += 200;
             score.text = sc.ToString();
         }
     }
