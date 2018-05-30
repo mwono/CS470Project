@@ -7,6 +7,8 @@ public class UIManagerScript : MonoBehaviour {
     public Animator startButton;
     public Animator settingsButton;
     public Animator dialog;
+    public Animator creditsBtn;
+    public Animator creditsWindow;
 
     /*
 	// Use this for initialization
@@ -30,6 +32,7 @@ public class UIManagerScript : MonoBehaviour {
     {
         startButton.SetBool("isHidden", true);
         settingsButton.SetBool("isHidden", true);
+        creditsBtn.SetBool("isHidden", true);
         dialog.SetBool("isHidden", false);
     }
 
@@ -37,9 +40,24 @@ public class UIManagerScript : MonoBehaviour {
     {
         startButton.SetBool("isHidden", false);
         settingsButton.SetBool("isHidden", false);
+        creditsBtn.SetBool("isHidden", false);
         dialog.SetBool("isHidden", true);
     }
 
+    public void OpenCredits()
+    {
+        startButton.SetBool("isHidden", true);
+        settingsButton.SetBool("isHidden", true);
+        creditsBtn.SetBool("isHidden", true);
+        creditsWindow.SetBool("isHidden", false);
+    }
 
+    public void CloseCredits()
+    {
+        startButton.SetBool("isHidden", false);
+        settingsButton.SetBool("isHidden", false);
+        creditsBtn.SetBool("isHidden", false);
+        creditsWindow.SetBool("isHidden", true);
+    }
 
 }

@@ -19,8 +19,8 @@ public class CameraFollow : MonoBehaviour {
         mCam.rect = new Rect(.5f, 0, .5f, 1);
         cCam.rect = new Rect(0, 0f, .5f, 1);
 
-        SetScissorRect(cCam, new Rect(0, 0, .6f, 1));
-        SetScissorRect(mCam, new Rect(.5f, 0, .4f, 1));
+        SetScissorRect(mCam, new Rect(.5f, 0, .5f, 1));
+        SetScissorRect(cCam, new Rect(0, 0, .5f, 1));
     }
     /*
     private void Update()
