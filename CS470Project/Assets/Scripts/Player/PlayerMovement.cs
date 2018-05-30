@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour {
     public bool grounded = true;
     public Animator playerAnim;
     public BackgroundScroll bgScript;
+    public AudioSource jump;
     bool falling = false;
 
     float leftSpeed = 4.5f;
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour {
         maxJumpHeight = transform.position.y + maxJumpHeight;
         defaultSpeed = bgScript.GetSpeed();
         curMovingUpTime = movingUpTime;
+        jump = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -40,6 +42,7 @@ public class PlayerMovement : MonoBehaviour {
                 groundPos = transform.position;
                 movingUpwards = true;
                 grounded = false;
+                jump.Play();
             }
         }
 
